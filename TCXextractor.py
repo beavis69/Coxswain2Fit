@@ -52,13 +52,13 @@ class lapcreator:
         for x in range(len(self.tp)):
             #print(len(self.tp))
             trackpointkpi = [self.tp[x][0].text,            # Time
-                             self.tp[x][1][0].text,         # Position ==> LatitudeDegrees
-                             self.tp[x][1][1].text,         # Position ==> LongitudeDegrees
-                             self.tp[x][3][0].text,         # HeartRateBpm ==> Value
-                             self.tp[x][4].text,            # Cadence
-                             self.tp[x][2].text,            # DistanceMeters
-                             self.tp[x][5][0][0].text,      # Speed
-                             self.tp[x][5][0][1].text       # Watts
+                             '0',         # Position ==> LatitudeDegrees
+                             '0',         # Position ==> LongitudeDegrees
+                             self.tp[x].xpath("./ts:HeartRateBpm", namespaces=ns)[0][0].text,
+                             self.tp[x].xpath("./ts:Cadence", namespaces=ns)[0].text,
+                             self.tp[x].xpath("./ts:DistanceMeters", namespaces=ns)[0].text,
+                             self.tp[x].xpath("./ts:Extensions", namespaces=ns)[0][0].xpath("./g:Speed",namespaces=ns)[0].text,
+                             self.tp[x].xpath("./ts:Extensions", namespaces=ns)[0][0].xpath("./g:Watts",namespaces=ns)[0].text,
             ]
             self.Totaltrackpointkpi.append(trackpointkpi)
 
@@ -74,7 +74,7 @@ class lapcreator:
             #self.kcalgen = (((33* 0.2017) - (78 * 0.09036) + int(self.tp[x][3][0].text))) * (1/60)/ 4.2
             #self.kcalgen = (-55.0969 + (0.6309 * int(self.tp[x][3][0].text)) + (0.1988 * 78) + (0.2017 * 33)) *( 1/60)/ 4.184
             #http://braydenwm.com/calburn.htm
-            self.kcalgen = (-95.7735 + (0.271 * self.age) + (0.394 * self.weight) + (0.404 * self.vo2max) + (0.634 * int(self.tp[x][3][0].text))) *(1/60) / 4.184
+            self.kcalgen = (-95.7735 + (0.271 * self.age) + (0.394 * self.weight) + (0.404 * self.vo2max) + (0.634 * int(self.tp[x].xpath("./ts:HeartRateBpm", namespaces=ns)[0][0].text))) *(1/60) / 4.184
             #self.kcalgen = ((0.000904 * (float(self.tp[x][5][0][0].text))**3) + (0.00105*80))
             #self.kcalgen = 8.5 * 78 * ((1/60)/60)
             # source = https://www.c2forum.com/viewtopic.php?t=13093
@@ -159,7 +159,7 @@ def lap_amount(tcx):
     """This part calculates the amount of laps for this run based on 500m sections """
 
     TotalLapDistance = root.xpath("//ts:Lap", namespaces=ns)[0]
-    TotalDistance = int(TotalLapDistance[1].text)
+    TotalDistance = int(float(TotalLapDistance[1].text))
 
     if TotalDistance % 500 == 0:
         AmountLaps = TotalDistance // 500

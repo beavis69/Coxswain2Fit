@@ -159,7 +159,7 @@ def record_preperator(record_array_tcx):
                           int(degree_to_semicircle((record[2]))), # degree long
                           int(record[3]), # heart reate
                           int(record[4]), # cadence
-                          int(record[5])*100,   # distance x 100
+                          int(float(record[5]))*100,   # distance x 100
                           int(float((record[6]))*1000), # speed x 1000
                           int(record[7]), #
                         ]

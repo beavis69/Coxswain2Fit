@@ -233,8 +233,8 @@ class session:
         self.Defi_data_array = [
         (253, "uint32", self.timestamp),
         (2, "uint32", self.start_time),
-        (3, "sint32", self.start_position_lat),
-        (4, "sint32", self.start_position_long),
+        #(3, "sint32", self.start_position_lat),
+        #(4, "sint32", self.start_position_long),
         (5, "enum", self.sport),
         (6, "enum", self.sub_sport),
         (7, "uint32", self.total_elasped_time),
@@ -294,10 +294,10 @@ class lap:
         self.Defi_data_array = [
         (253, "uint32", self.timestamp),
         (2, "uint32", self.start_time),
-        (3, "sint32", self.start_position_lat),
-        (4, "sint32", self.start_position_long),
-        (5, "sint32", self.end_position_lat),
-        (6, "sint32", self.end_position_long),
+        #(3, "sint32", self.start_position_lat),
+        #(4, "sint32", self.start_position_long),
+        #(5, "sint32", self.end_position_lat),
+        #(6, "sint32", self.end_position_long),
         (7, "uint32", self.total_elasped_time),
         (8, "uint32", self.total_timer_time),
         (9, "uint32", self.total_distance),
@@ -338,8 +338,8 @@ class record:
         self.record_id = 0
         self.Defi_data_array = [
         (253, "uint32", self.timestamp),
-        (0, "sint32", self.position_lat),
-        (1, "sint32", self.position_long),
+        #(0, "sint32", self.position_lat),
+        #(1, "sint32", self.position_long),
         (3, "uint8", self.heart_rate),
         (4, "uint8", self.cadence),
         (5, "uint32", self.distance),
