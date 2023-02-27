@@ -11,7 +11,7 @@ def epoch_calc_sec(Training_datetime):
     date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
     epoch = (datetime.fromisoformat("1989-12-31 00:00:00"))
     Training_datetime_calc = datetime.strptime(Training_datetime, date_format)
-    timestamp = int((Training_datetime_calc - epoch).total_seconds())
+    timestamp = float((Training_datetime_calc - epoch).total_seconds())
     return timestamp
 
 def activity_preparator(record_array_tcx):
@@ -154,13 +154,13 @@ def record_preperator(record_array_tcx):
         record_array_lap_fit = []
         for index2, record in enumerate(records):
 
-            record_fit = [int(epoch_calc_sec(record[0])), # timestamp
+            record_fit = [int(round(epoch_calc_sec(record[0]))), # timestamp
                           int(degree_to_semicircle((record[1]))), # degree lat
                           int(degree_to_semicircle((record[2]))), # degree long
                           int(record[3]), # heart reate
                           int(record[4]), # cadence
-                          int(float(record[5]))*100,   # distance x 100
-                          int(float((record[6]))*1000), # speed x 1000
+                          int(float(record[5])*100),   # distance x 100
+                          int(float(record[6])*1000), # speed x 1000
                           int(record[7]), #
                         ]
             record_array_lap_fit.append(record_fit)

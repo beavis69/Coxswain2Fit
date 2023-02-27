@@ -159,12 +159,12 @@ def lap_amount(tcx):
     """This part calculates the amount of laps for this run based on 500m sections """
 
     TotalLapDistance = root.xpath("//ts:Lap", namespaces=ns)[0]
-    TotalDistance = int(float(TotalLapDistance[1].text))
+    TotalDistance = float(TotalLapDistance[1].text)
 
-    if TotalDistance % 500 == 0:
-        AmountLaps = TotalDistance // 500
+    if round(TotalDistance) % 500 == 0:
+        AmountLaps = round(TotalDistance) // 500
     else:
-        AmountLaps= (TotalDistance // 500) + 1
+        AmountLaps= (round(TotalDistance) // 500) + 1
 
     return(root,AmountLaps)
 

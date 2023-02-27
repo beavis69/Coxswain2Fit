@@ -364,7 +364,7 @@ def epoch_calc_sec(Training_datetime):
     date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
     epoch = (datetime.fromisoformat("1989-12-31 00:00:00"))
     Training_datetime_calc = datetime.strptime(Training_datetime, date_format)
-    timestamp = int((Training_datetime_calc - epoch).total_seconds())
+    timestamp = round((Training_datetime_calc - epoch).total_seconds())
     return timestamp
 
 def fit_main_header():
